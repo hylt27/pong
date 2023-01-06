@@ -50,7 +50,7 @@ color = cyan
 #ball speed
 ball_x_speed = 7
 ball_y_speed = 6
-
+player_speed = 0
 
 while True:
     # handling output
@@ -58,8 +58,20 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_DOWN:
+                player_speed += 7
+            if event.key == pygame.K_UP:
+                player_speed -= 7
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_DOWN:
+                player_speed -= 7
+            if event.key == pygame.K_UP:
+                player_speed += 7
+
 
     ball_animation()
+    player.y += player_speed
 
     #visuals
     screen.fill(bg_color)
