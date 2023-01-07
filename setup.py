@@ -61,12 +61,13 @@ screen_height = 720
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Pong')
 
-#objects
+# objects
 ball = pygame.Rect(screen_width/2 - 15, screen_height/2 - 15, 30, 30)
 player = pygame.Rect(screen_width - 10, screen_height/2 - 70, 10, 140)
 opponent = pygame.Rect(0, screen_height/2 - 70, 10, 140)
+scoreboard = pygame.Rect(screen_width/2 - 70, 10, 140, 30)
 
-#colors
+# colors
 bg_color = [191, 191, 191]
 black = [0, 0, 0]
 red = [150, 21, 28]
@@ -74,7 +75,7 @@ purple = [154, 55, 240]
 cyan = [35, 186, 216]
 color = cyan
 
-#ball speed
+# ball speed
 ball_x_speed = 7 * random.choice((1, -1))
 ball_y_speed = 7 * random.choice((1, 1))
 player_speed = 0
@@ -97,19 +98,20 @@ while True:
             if event.key == pygame.K_UP:
                 player_speed += 7
 
-
+    # game logic
     ball_animation()
     player_animation()
     opponent_animation()
 
 
-    #visuals
+    # visuals
     screen.fill(bg_color)
+    pygame.draw.rect(screen, purple, scoreboard)
     pygame.draw.rect(screen, purple, player)
     pygame.draw.rect(screen, red, opponent)
     pygame.draw.ellipse(screen, color, ball)
-    pygame.draw.aaline(screen, black, (screen_width/2,0), (screen_width/2, screen_height))
-    
-    #updating the window
+    pygame.draw.aaline(screen, black, (screen_width/2, 0), (screen_width/2, screen_height))
+
+    # updating the window
     pygame.display.flip()
     clock.tick(60)
